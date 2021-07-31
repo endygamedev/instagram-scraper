@@ -55,7 +55,7 @@ class Scraper:
         action.send_keys(Keys.RETURN)
         time.sleep(self.__TIME_SLEEP_AUTH)
 
-    def get_followers_list(self, profile: str) -> list:
+    def get_follower_list(self, profile: str) -> list:
         """
             **Description:** Takes the `user's nickname` and gives a list of usernames that are followed to this user
 
@@ -95,6 +95,6 @@ class Scraper:
 
 scraper = Scraper(__USERNAME, __PASSWORD)
 scraper.authentication()
-follower_list = scraper.get_followers_list(profile_name)
+follower_list = scraper.get_follower_list(profile_name)
 print(len(follower_list))
 print(follower_list)

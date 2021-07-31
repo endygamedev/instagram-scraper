@@ -16,11 +16,14 @@ profile_name = "profile"    # Instagram profile that interests you, for example:
 
 scraper = Scraper(__USERNAME, __PASSWORD)
 scraper.authentication()
-follower_list = scraper.get_followers_list(profile_name)
+follower_list = scraper.get_follower_list(profile_name)
 
 print(len(follower_list))
 print(follower_list)
 ```
+
+### Dependencies
+For the script to work correctly, you need to install [Firefox](https://www.mozilla.org/en-US/firefox/new/) and [Geckodriver](https://github.com/mozilla/geckodriver/releases) or you can use another browser, but for this you need to watch yourself how to connect `webdriver`.
 
 ### License
 Instagram Engagement Data is licensed under the [GNU General Public License v3.0](./LICENSE).
