@@ -1,11 +1,10 @@
-<h1><img alt="instagram-logo" src="./assets/logo.webp" width=30> Instagram Engagement Data</h1>
+<h1 align="center"><img alt="instagram-logo" src="./assets/logo.webp" width=30> Instagram Engagement Data</h1>
+<p align="center">This repository is an order from a freelance.</p>
 
-This repository is an order from a freelance.
-
-### Task
+## Task
 I have one instagram profile with 2 posts on it that I need to find out of each like if they follow the user or not. So for example if the profile has 100k followers and 50k likes on one of their posts, I need to find out how many of those 50k likes follow the profile. If you can write a script where I can easily swap profile usernames if I want to test another instagram profile for the same data extraction that would be great. Please write the script in python if possible. Expected output would be the script code and a csv file with a column for the username "@" of the "likes" on each post, a column with a 1/0 or a Yes/No if that username "@" that liked the post also follows the profile.
 
-### Documentation
+## Documentation
 `class Scraper(username: str, password: str)` — main class that takes all the information from Instagram
 
 `def Scraper.authentication() -> None` — function with which you can log into Instagram
@@ -16,7 +15,7 @@ I have one instagram profile with 2 posts on it that I need to find out of each 
 
 `def Scraper.end() -> None` — function that exits the `webdriver`
 
-### Example
+## Example
 ```python
 from scraper import Scraper
 from pprint import pprint
@@ -40,8 +39,8 @@ pprint({len(likes_list): likes_list})
 scraper.end()
 ```
 
-### Dependencies
+## Dependencies
 For the script to work correctly, you need to install [Firefox](https://www.mozilla.org/en-US/firefox/new/) and [Geckodriver](https://github.com/mozilla/geckodriver/releases) or you can use another browser, but for this you need to watch yourself how to connect `webdriver`.
 
-### License
+## License
 Instagram Engagement Data is licensed under the [GNU General Public License v3.0](./LICENSE).
