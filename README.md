@@ -15,11 +15,8 @@ I have one instagram profile with 2 posts on it that I need to find out of each 
 
 `def Scraper.end() -> None` — function that exits the `webdriver`
 
-<<<<<<< HEAD
 `def Scraper.run_and_save(profile: str, post: str, post="": str) -> None` — function that launches the scraper and saves the data to a `.csv` file
 
-=======
->>>>>>> 737afdd92233b44bcca17086bbf7e8b33bd5a20e
 ## Example
 ```python
 from scraper import Scraper
