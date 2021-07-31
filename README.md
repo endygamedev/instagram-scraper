@@ -38,6 +38,8 @@ pprint({len(follower_list): follower_list})
 likes_list = scraper.get_likes_list(post_link)
 pprint({len(likes_list): likes_list})
 
+scraper.run_and_save(profile_name, post_link)
+
 scraper.end()
 ```
 
