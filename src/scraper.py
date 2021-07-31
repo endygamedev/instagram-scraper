@@ -4,14 +4,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pprint import pprint
 from typing import List
+import pandas as pd
 import time
+
 
 # Constants and variables
 __USERNAME = "username"         # Your `username` from Instagram account
 __PASSWORD = "password"         # Your `password` from Instagram account
-profile_name = "profile_name"   # Instagram profile that interests you, for example: 'endygamedev_'
+profile_name = "profile"        # Instagram profile that interests you, for example: 'endygamedev_'
 post_link = "post_url"          # Instagram post that insterest you, for example: 'https://www.instagram.com/p/CRmQr4yrBz0/'
 
 
@@ -102,9 +103,9 @@ class Scraper:
         """
             **Description:** Takes the `URL of the post` and gives a list of usernames that are liked this post
 
-            :param post: URL to the Instagram post that interests you
+            :param post: URL to the instagram post that interests you
             :type post: str
-            :return: List of instagram usernames who liked the `post`
+            :returns: List of instagram usernames who liked the `post`
             :rtype: List[str]
         """
         wait = WebDriverWait(self._driver, 10)
@@ -148,15 +149,29 @@ class Scraper:
         print(f"Program worked {time.time() - self._start} seconds".center(100, " "))
         print("-".center(100, "-"))
 
+    def run_and_save(self, profile: str, post: str, path="") -> None:
+        """
+            **Description:** Launches the scraper and saves the data under the name `result.csv`
+
+            :param profile: username on instagram
+            :type profile: str
+            :param post: URL to the instagram post that interests you
+            :type post: str
+            :param path: path where the `.csv` file will be saved
+            :type path: str
+            :returns: `.csv` file with collected data
+            :rtype: None
+        """
+        follower_list = self.get_follower_list(profile)
+        likes_list = self.get_likes_list(post)
+        mask = [1 if follower in likes_list else 0 for follower in follower_list]
+        table = {"@, username": follower_list, "liked post (0/1)": mask}
+        path += "result.csv"
+        pd.DataFrame(table).to_csv(path, encoding="utf-8")
+
 
 if __name__ == "__main__":
     scraper = Scraper(__USERNAME, __PASSWORD)
     scraper.authentication()
-
-    likes_list = scraper.get_likes_list(post_link)
-    pprint({len(likes_list): likes_list})
-
-    follower_list = scraper.get_follower_list(profile_name)
-    pprint({len(follower_list): follower_list})
-
+    scraper.run_and_save(profile_name, post_link)
     scraper.end()
