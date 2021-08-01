@@ -17,6 +17,8 @@ I have one instagram profile with 2 posts on it that I need to find out of each 
 
 `def Scraper.run_and_save(profile: str, post: str, post="": str) -> None` — function that launches the scraper and saves the data to a `.csv` file
 
+You can also use GUI — [gui.py](/src/gui.py).
+
 ## Example
 ```python
 from scraper import Scraper
@@ -47,4 +49,4 @@ scraper.end()
 For the script to work correctly, you need to install [Firefox](https://www.mozilla.org/en-US/firefox/new/) and [Geckodriver](https://github.com/mozilla/geckodriver/releases) or you can use another browser, but for this you need to watch yourself how to connect `webdriver`.
 
 ## License
-Instagram Engagement Data is licensed under the [GNU General Public License v3.0](./LICENSE).
+`instagram-scraper` is licensed under the [GNU General Public License v3.0](./LICENSE).

@@ -9,21 +9,14 @@ import pandas as pd
 import time
 
 
-# Constants and variables
-__USERNAME = "username"         # Your `username` from Instagram account
-__PASSWORD = "password"         # Your `password` from Instagram account
-profile_name = "profile"        # Instagram profile that interests you, for example: 'endygamedev_'
-post_link = "post_url"          # Instagram post that insterest you, for example: 'https://www.instagram.com/p/CRmQr4yrBz0/'
-
-
 class Scraper:
     def __init__(self, username: str, password: str) -> None:
         """
             **Description:** Class for collecting information from Instagram
 
-            :param username: Instagram `username` for authentication
+            :param username: instagram `username` for authentication
             :type username: str
-            :param password: Instagram `password` for authentication
+            :param password: instagram `password` for authentication
             :type password: str
             :returns: Creates a `webdriver` and initializes variables
             :rtype: None
@@ -75,12 +68,10 @@ class Scraper:
         time.sleep(self.__TIME_SLEEP)
 
         # Get the number of followers
-        followers_count = int(
-            self._driver.find_element_by_xpath(
-                '/html/body/div[1]/section/main/div/header/section/ul/li[2]/a/span').text)
+        followers_count = int(self._driver.find_element_by_xpath("//a[contains(@href, 'followers')]/span").text)
 
         # Click on the `followers button`
-        followers_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "a[href*='followers']")))
+        followers_button = self._driver.find_element_by_xpath("//a[contains(@href, 'followers')]")
         followers_button.click()
         time.sleep(self.__TIME_SLEEP)
         dialogue_box = wait.until(
@@ -108,17 +99,14 @@ class Scraper:
             :returns: List of instagram usernames who liked the `post`
             :rtype: List[str]
         """
-        wait = WebDriverWait(self._driver, 10)
         self._driver.get(post)
         time.sleep(self.__TIME_SLEEP)
 
         # Get the number of likes
-        likes_count = int(
-            self._driver.find_element_by_xpath(
-                "/html/body/div[1]/section/main/div/div[1]/article/div[3]/section[2]/div/div/a/span").text)
+        likes_count = int(self._driver.find_element_by_xpath("//a[contains(@href, 'liked_by')]/span").text) + 3
 
         # Click on the `likes button`
-        likes_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "a[href*='liked_by']")))
+        likes_button = self._driver.find_element_by_xpath("//a[contains(@href, 'liked_by')]")
         likes_button.click()
         time.sleep(self.__TIME_SLEEP)
         dialogue_box = self._driver.find_element_by_xpath("/html/body/div[5]/div/div/div[2]/div")
@@ -171,7 +159,13 @@ class Scraper:
 
 
 if __name__ == "__main__":
-    scraper = Scraper(__USERNAME, __PASSWORD)
+    username = "username"       # Your `username` from Instagram account
+    password = "password"       # Your `password` from Instagram account
+    profile_name = "profile"    # Instagram profile that interests you, for example: 'endygamedev_'
+    post_link = "post"          # Instagram post that insterest you, for example: 'https://www.instagram.com/p/CRmQr4yrBz0/'
+
+    scraper = Scraper(username, password)
     scraper.authentication()
+    scraper.get_likes_list(post_link)
     scraper.run_and_save(profile_name, post_link)
     scraper.end()
