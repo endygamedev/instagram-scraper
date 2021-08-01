@@ -25,8 +25,8 @@ from scraper import Scraper
 from pprint import pprint
 
 
-__USERNAME = "username"     # Your `username` from Instagram account
-__PASSWORD = "password"     # Your `password` from Instagram account
+username = "username"       # Your `username` from Instagram account
+password = "password"       # Your `password` from Instagram account
 profile_name = "profile"    # Instagram profile that interests you, for example: 'endygamedev_'
 post_link = "post_url"      # Instagram post that insterest you, for example: 'https://www.instagram.com/p/CRmQr4yrBz0/'
 
