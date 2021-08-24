@@ -31,7 +31,7 @@ profile_name = "profile"    # Instagram profile that interests you, for example:
 post_link = "post_url"      # Instagram post that insterest you, for example: 'https://www.instagram.com/p/CRmQr4yrBz0/'
 
 
-scraper = Scraper(__USERNAME, __PASSWORD)
+scraper = Scraper(username, password)
 scraper.authentication()
 
 follower_list = scraper.get_follower_list(profile_name)
